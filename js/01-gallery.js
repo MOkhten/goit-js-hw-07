@@ -21,24 +21,25 @@ const createGallery = makeGallery(galleryItems);
 galleryEl.innerHTML = createGallery;
 galleryEl.addEventListener('click', onClickFunction);
 
+
+   
 function onClickFunction(e) {
+     e.preventDefault();
     if (e.target.nodeName !== 'IMG') {
         return;
     }
+
     const instance = basicLightbox.create(`
     <img src='${e.target.dataset.source}' width="800" height="600">
 `);
+ 
+      instance.show();
 
-    instance.show();
 
-
-    galleryEl.addEventListener('keydown', e => {
+     galleryEl.addEventListener('keydown', e => {
         if (e.code === 'Escape') {
             instance.close();
-        }
+       }
     });
 }
 
-function blockStandartAction(e){
-    e.preventDefault();
-}
